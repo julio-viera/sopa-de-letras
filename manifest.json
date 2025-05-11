@@ -1,0 +1,34 @@
+{
+	"name": "JV Sopa de Letras",
+	"short_name": "JV Sopa de Letras",
+	"description": "Juego de sopa de letras.",
+	"start_url": ".",
+	"background_color": "#ddd",
+	"theme_color": "#ddd",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "img/sopa-512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "img/sopa-192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "img/pantalla-512x512.jpg",
+			"sizes": "512x512",
+			"type": "image/jpeg"
+		},
+		{
+			"src": "img/pantalla-614x360.jpg",
+			"sizes": "614x360",
+			"type": "image/jpeg",
+			"form_factor": "wide"
+		}
+	]
+}
