@@ -244,7 +244,7 @@ export class SopaDeLetras extends CosoComponente {
 		this.almacenaje = new CosoAlmacenajeLocal()
 
 		if (!this.props.tablero_tamanio) this.props.tablero_tamanio = this.almacenaje.obtener('tablero_tamanio', 4)
-		if (!this.props.dificultad) this.props.dificultad = this.almacenaje.obtener('tablero_dificultad', 2)
+		if (!this.props.dificultad) this.props.dificultad = this.almacenaje.obtener('tablero_dificultad', 0)
 
 		this._version = '0.9.0';
 
@@ -311,6 +311,7 @@ export class SopaDeLetras extends CosoComponente {
 		this._dificultad = this.crear('select', { class: 'dificultad' })
 
 		const dificultades = {
+			0: 'Jugar sin Tiempo',
 			1: 'Dificultadad - Fácil',
 			2: 'Dificultadad - Intermedio',
 			3: 'Dificultadad - Difícil'
@@ -464,7 +465,8 @@ export class SopaDeLetras extends CosoComponente {
 		const dif = this.props.dificultad
 		let minutos = (cantidad_palabras * 1)
 
-		if (dif == 1) minutos *= 3.0
+		if(dif == 0) minutos = 0
+		else if (dif == 1) minutos *= 3.0
 		else if (dif == 2) minutos *= 2.0
 
 		minutos = Math.floor(minutos)
@@ -478,8 +480,14 @@ export class SopaDeLetras extends CosoComponente {
 					if (j && j.error === false && j.palabras && Array.isArray(j.palabras) && j.palabras.length > 0) {
 						this.construir(j.palabras)
 						this.estado = ESTADO_CARGA.CARGADO
-						this._tiempo.segundos = 60 * minutos
-						this._tiempo.mostrar('flex')
+						if(dif == 0){
+							this._tiempo.detener()
+							this._tiempo.ocultar()
+						}
+						else{
+							this._tiempo.segundos = 60 * minutos
+							this._tiempo.mostrar('flex')
+						}
 						this.actualizarPuntos()
 					}
 					else {
