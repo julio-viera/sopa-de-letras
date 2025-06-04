@@ -1,6 +1,6 @@
 
 const log = false
-const version = '0.0.8'
+const version = '0.0.91'
 const nombre_cache = 'sopa-cache'
 const precachear = [
 	'/sopa-de-letras/sw_control.js',

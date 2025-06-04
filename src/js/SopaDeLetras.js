@@ -463,15 +463,11 @@ export class SopaDeLetras extends CosoComponente {
 		}
 
 		const pantalla = Util.dimensionesNavegador()
-		if(pantalla.w < pantalla.h && this.props.ancho > this.props.alto){
-			const tmpw = this.props.ancho
-			this.props.ancho = this.props.alto
-			this.props.alto = tmpw
-		}
-		else if (pantalla.w > pantalla.h && this.props.ancho < this.props.alto){
-			const tmpw = this.props.ancho
-			this.props.ancho = this.props.alto
-			this.props.alto = tmpw
+
+		const max_ancho = Math.floor(pantalla.w / 40)
+
+		if(this.props.ancho > max_ancho){
+			this.props.ancho = max_ancho
 		}
 
 		const cantidad_palabras = Math.floor(Math.sqrt(Math.pow(this.props.ancho, 2) + Math.pow(this.props.alto, 2)))
@@ -1168,6 +1164,22 @@ export class SopaDeLetras extends CosoComponente {
 					}
 				}
 
+				@media only screen and (max-width: 500px) {
+					:host{
+						padding: 0.1em;
+					}
+					main {
+						padding: 0.1em;
+					}
+					.cabecera{
+						display: flex;
+        		flex-direction: column;
+					}
+					.pie{
+						display: flex;
+        		flex-direction: column;
+					}
+				}
 	  `;
 
 		return estilos
