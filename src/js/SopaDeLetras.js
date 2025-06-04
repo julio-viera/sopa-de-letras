@@ -6,6 +6,7 @@ import { ESTADO_CARGA, CosoComponente } from './coso-ui/CosoComponente.js'
 import { Conector } from './coso-ui/Conector.js'
 import { CuentaRegresivaSegundos } from './coso-ui/CuentaRegresivaSegundos.js'
 import { CosoAlmacenajeLocal } from './coso-ui/CosoAlmacenajeLocal.js'
+import { Util } from './coso-ui/Util.js'
 
 export class Letra extends HTMLElement {
 	constructor(props) {
@@ -459,6 +460,18 @@ export class SopaDeLetras extends CosoComponente {
 			console.error('Dimensiones muy chicas. ', this.props.ancho, this.props.alto)
 			this.mensaje = 'Dimensiones muy chicas. ' + this.props.ancho + 'x' + this.props.alto
 			return
+		}
+
+		const pantalla = Util.dimensionesNavegador()
+		if(pantalla.w < pantalla.h && this.props.ancho > this.props.alto){
+			const tmpw = this.props.ancho
+			this.props.ancho = this.props.alto
+			this.props.alto = tmpw
+		}
+		else if (pantalla.w > pantalla.h && this.props.ancho < this.props.alto){
+			const tmpw = this.props.ancho
+			this.props.ancho = this.props.alto
+			this.props.alto = tmpw
 		}
 
 		const cantidad_palabras = Math.floor(Math.sqrt(Math.pow(this.props.ancho, 2) + Math.pow(this.props.alto, 2)))
